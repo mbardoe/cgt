@@ -1,4 +1,6 @@
 ## Combinatorial game theory
+![Tests](https://github.com/InnovativeInventor/cgt/workflows/Python%20testing%20and%20linting/badge.svg)
+
 Generalized deterministic recursive combinatorial game theory calculator for evaluating the state of any two-person game that has a corresponding number.
 Only uses vanilla python and pydantic (for type-checking).
 
