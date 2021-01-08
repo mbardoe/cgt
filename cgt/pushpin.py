@@ -1,8 +1,7 @@
 from typing import List
 from copy import deepcopy
 
-PushPinState = List
-
+PushPinState = List[str]
 
 class PushPinGame:
     """
@@ -10,7 +9,7 @@ class PushPinGame:
     state is a list of "L", "R", or ""
     """
 
-    def __init__(self, state: List = []):
+    def __init__(self, state: PushPinState = []):
         self.state = state
         self.possible_moves = self.moves()
 
@@ -42,7 +41,10 @@ class PushPinGame:
 
         return possible_moves
 
-    def push(self, state: List[str], index: int):
+    def push(self, state: PushPinState, index: int) -> PushPinState:
+        """
+        Push a square, specified by its index
+        """
         pusher = state[index]
         state[index] = ""
 
@@ -63,7 +65,7 @@ class PushPinGame:
         """
         self.state = state
 
-    def prune_states(self, state: PushPinState):
+    def prune_states(self, state: PushPinState) -> PushPinState:
         """
         Gets rid of empty hanging squares.
         """

@@ -2,11 +2,7 @@ from typing import TypeVar, Generic, List
 import math
 from copy import deepcopy
 
-# Game = TypeVar("Game")
-# State = TypeVar("State")
-
-CACHE = {}
-
+CACHE = {} # for performance
 
 class GameTree:
     """
@@ -14,22 +10,10 @@ class GameTree:
     For an example game implementation, see `example.py`
     """
 
-    # def __init__(self, starting_state: Game):
     def __init__(self, starting_state=None):
-        # self.starting_state: Game = starting_state
         self.starting_state = starting_state
 
         self.move_tree: List[list] = [[], []]
-
-    def __cmp__(self, other):
-        difference = self.value() - other.value()
-
-        if difference > 0:
-            return 1
-        elif difference < 0:
-            return -1
-        else:
-            return 0
 
     def __lt__(self, other):
         difference = self.value() - other.value()
@@ -55,7 +39,6 @@ class GameTree:
             starting_state = False
             right = min(right_moves).number
 
-        # if right != [] and left == []:
         try:
             self.number = self.smallest_power_between(left, right)
 
@@ -105,7 +88,6 @@ class GameTree:
 
         return float(number)
 
-    # def _construct_tree(self, starting_state: Game):
     def _construct_tree(self, starting_state):
         """
         Recursively construct move tree
