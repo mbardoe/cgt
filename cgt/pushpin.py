@@ -66,11 +66,12 @@ class PushPinGame:
         """
         self.state = state
 
-    def prune_states(self, state: PushPinState) -> PushPinState:
+    @staticmethod
+    def prune_states(state: PushPinState) -> PushPinState:
         """
-        Gets rid of empty hanging squares.
+        Gets rid of empty hanging squares and normalizes the state.
         """
         if state and not state[-1]:
-            return self.prune_states(state[:-1])
+            return PushPinGame.prune_states(state[:-1])
         else:
             return state

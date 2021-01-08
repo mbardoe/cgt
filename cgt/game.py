@@ -96,6 +96,8 @@ class GameTree:
         if starting_state:
             for index, player in enumerate(starting_state.moves()):
                 for each_move in player:
+                    each_move = starting_state.prune_states(each_move) # normalize
+
                     child_game = deepcopy(starting_state)
 
                     # One may ask why we delegate the swap out move function

@@ -22,7 +22,6 @@ Output:
 ```
 
 ## Implementing your own game
-
 ```python
 class AbstractGame():
     """
@@ -40,6 +39,13 @@ class AbstractGame():
     def apply(self, state: AbstractState): # takes a state and applies it to the game
         """
         Apply a move or "state" return by moves.
+        """
+        raise NotImplementedError
+
+    @staticmethod
+    def prune_states(self, state: AbstractState) -> AbstractState:
+        """
+        Normalizes the state
         """
         raise NotImplementedError
 ```
