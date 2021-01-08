@@ -36,3 +36,10 @@ class AbstractGame:
         Apply a move or "state" return by moves.
         """
         self.state = state
+
+    @staticmethod
+    def prune_states(self, state: PushPinState) -> PushPinState:
+        """
+        Normalizes the state
+        """
+        raise NotImplementedError
