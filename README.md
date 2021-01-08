@@ -30,7 +30,7 @@ class AbstractGame():
     def __init__(self, state: AbstractState = AbstractState()): # some state to pass to the game
         raise NotImplementedError
 
-    def moves(self) -> List[List[AbstractState]]: # return a list of moves for each player
+    def moves(self) -> List[Set[AbstractState]]: # return a list of a set of moves for each player
         """
         Returns the possible moves left. If there are no moves left, return empty lists.
         """
