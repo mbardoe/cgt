@@ -12,6 +12,10 @@ from cgt.pushpin import PushPinGame
 
 case = PushPinGame(["", "L", "R"])
 print(GameTree(case).value())
+```
+
+Output:
+``` python
 >>> -1.75
 ```
 
