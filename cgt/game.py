@@ -17,11 +17,10 @@ class GameTree:
         self.move_tree: List[list] = [[], []]
 
     def __lt__(self, other):
-        difference = self.value() - other.value()
-
-        if difference < 0:
+        if self.value() - other.value() < 0:
             return True
-        return False
+        else:
+            return False
 
     def value(self) -> float:
         """
@@ -98,19 +97,18 @@ class GameTree:
                 for each_move in player:
                     each_move = starting_state.prune_states(each_move) # normalize
 
-                    child_game = deepcopy(starting_state)
+                    # child_game = deepcopy(starting_state)
+                    child_game = starting_state.__class__(each_move)
 
-                    # One may ask why we delegate the swap out move function
-                    # we delegate the swap out move function since it belongs
-                    # in the game implementation
-                    child_game.apply(each_move)
+                    # the apply function is delegated to the game class
+                    # because it's out of scope for this class
+                    # child_game.apply(each_move)
                     child_tree = GameTree(child_game)
 
-                    if tuple(each_move) in CACHE:  # check cache
-                        child_tree.number = CACHE[tuple(each_move)]
-
+                    if each_move in CACHE:  # check cache
+                        child_tree.number = CACHE[each_move]
                     else:
-                        CACHE[tuple(each_move)] = child_tree.value()
+                        CACHE[each_move] = child_tree.value()
 
                     self.move_tree[index].append(child_tree)
 

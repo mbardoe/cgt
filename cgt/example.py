@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Tuple, List
+from typing import Tuple, List, Set
 from typing import TypeVar, Generic
 
 """
@@ -25,7 +25,7 @@ class AbstractGame:
         self.state = state
         self.possible_moves = self.moves()
 
-    def moves(self) -> List[List[AbstractState]]:
+    def moves(self) -> List[Set[AbstractState]]:
         """
         Returns the possible moves left. If there are no moves left, return empty lists.
         """
