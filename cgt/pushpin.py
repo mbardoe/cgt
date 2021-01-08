@@ -3,6 +3,7 @@ from copy import deepcopy
 
 PushPinState = List[str]
 
+
 class PushPinGame:
     """
     Pushpin game implementation

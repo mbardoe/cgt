@@ -2,7 +2,8 @@ from typing import TypeVar, Generic, List
 import math
 from copy import deepcopy
 
-CACHE = {} # for performance
+CACHE = {}  # for performance
+
 
 class GameTree:
     """
