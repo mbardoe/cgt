@@ -1,0 +1,157 @@
+% Created 2021-01-08 Fri 21:03
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\setlength{\parindent}{0pt}
+\author{Max Fan}
+\date{\today}
+\title{Pushpin (maybe I got the game name wrong) Proofs}
+\hypersetup{
+ pdfauthor={Max Fan},
+ pdftitle={Pushpin (maybe I got the game name wrong) Proofs},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 27.1 (Org mode 9.5)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+For the following lemmas, I'm considering all games in which left has a winning strategy (values > 0).
+By swapping \underline{L} and \underline{R}, you can get the same results for \underline{R} and thus for all valid positions of the game.
+
+\bigskip
+
+Notation:
+
+\begin{itemize}
+\item Each literal symbol will be underlined (\underline{L} or \underline{R})
+
+\item \(\mathbb{X}_{n}\) represents, without loss of generality any sequence of characters or spaces of length \(n\).
+\(\mathbb{X}_{n}'\) represents the sequence \(\mathbb{X}\) with the rightmost space removed, if one exists.
+If a rightmost space does not exist, then \(\mathbb{X}_{n}=\mathbb{X}_{n}'\)
+
+\item Upper case symbols (like \(G\), \(A\), and \(B\)) represent sequences/game states.
+
+\item Greek symbols will be used to denote a single character, that can either be \(\underline{L}\), \(\underline{R}\), \(\_\).
+
+\item The entire game state will be completely underlined (e.g. \(\underline{\underline{L} \underline{L} \underline{R}}\))
+
+\item ``+'' means concatenation of a sequence
+\end{itemize}
+
+The evaluation of a sequence will be denoted like so, where \(G\) is the current game state and the number preceding the colon is the square being pushed:
+$$G := \underline{\underline{L} \underline{L} \underline{R}}$$
+$$G_{0}: \underline{\underline{L} \underline{L} \underline{R}} \to \underline{\_ \underline{L} \underline{R}}$$
+$$G_{1}: \underline{\underline{L} \underline{L} \underline{R}} \to \underline{\underline{L} \underline{R}}$$
+$$G_{2}: \underline{\underline{L} \underline{L} \underline{R}} \to \underline{\underline{L} \underline{R}}$$
+
+The game is zero-indexed.
+
+Different game positions can be compared like so:
+$$G > G_{1} \ge G_{2}$$
+
+\section*{Lemmas}
+\label{sec:orgdcb17ac}
+\subsection*{Accessibility Lemma (done)}
+\label{sec:orgc8d915b}
+If one game position \(Q\) is accessible from another game position \(P\), ending in \(\underline{L}\), by a series of moves, then \(P > Q\).
+
+Rationale:
+Whenever a move is played, by \(\underline{L}\) or \(\underline{R}\), the value of the game is always closer to zero.
+
+\subsection*{Reduction Lemma (done)}
+\label{sec:org4b27bec}
+If \(\mathbb{X}_{n}\) has spaces, then:
+$$\mathbb{X}_{n} > \mathbb{X}_{n}'$$
+If \(\mathbb{X}_{n}\) has no spaces, then:
+$$\mathbb{X}_{n} = \mathbb{X}_{n}'$$
+
+\subsection*{Same-Length Concat Lemma}
+\label{sec:orge7f4bc8}
+If \(P > Q\) and \(P\) and \(Q\) are of the same length and \(A\) ends in \(\underline{L}\), then \(P + A > Q + A\).
+Proof.
+
+\bigskip
+Starting from the rightmost square, if \(P > Q\) then \(P \not= Q\) and \(P\) and \(Q\) must differ at a location \(n\).
+Let \(P = P_{1} + \underline{\alpha} + A\) and \(Q = Q_{1} + \underline{\beta} + A\) where \(\beta\) is the symbol at the location \(n\) where \(P\) and \(Q\) differ.
+By construction, \(\underline{\alpha} \not= \underline{\beta}\).
+Suppose for contradiction that \(\underline{\alpha} < \underline{\beta}\).
+Then,
+
+Suppose \(P\) is positive.
+\(Q\) is either positive, zero, or negative.
+If zero, done .
+
+\subsection*{General Prepend Lemma (done)}
+\label{sec:org76d1c95}
+If \(A\) ends in \(\underline{L}\), then for any characters \(\underline{\alpha}\) and \(\underline{\beta}\) such that \(\underline{\alpha} > \underline{\beta}\), then \(P := \underline{\underline{\alpha} + A} > Q := \underline{\underline{\beta} + A}\). Proof.
+
+There are three cases to examine:
+\begin{itemize}
+\item \(\underline{\alpha} = \underline{L}\), \(\underline{\beta} = \underline{\_}\)
+In this case, \(P_{0}: \underline{\underline{\alpha} + A} \to \underline{\underline{\beta} + A}\), so
+\(P > Q\) by the accessibility lemma.
+
+\item \(\underline{\alpha} = \underline{\_}\), \(\underline{\beta} = \underline{R}\)
+In this case, \(Q\) has more \(\underline{R}\) values than \(P\) and the same number and location of \(\underline{L}\) values.
+Since right has more moves available in \(Q\) than in \(P\), \(P > Q\) (TODO: better justification).
+
+\item \(\underline{\alpha} = \underline{L}\), \(\underline{\beta} = \underline{R}\)
+From the first case and the second case and the transitive property,
+\(P > Q\) follows.
+\end{itemize}
+
+In all three cases, \(P > Q\), so necessarily, \(P > Q\).
+
+\subsection*{Append Lemma (unproven)}
+\label{sec:org27a06c3}
+For any sequence of characters (empty or not), \(\mathbb{X}_{n}\):
+$$\underline{\mathbb{X}_{n} \underline{L}} > \underline{\mathbb{X}_{n}}$$
+
+\subsection*{Prepend Lemma}
+\label{sec:org0dbbd71}
+For any sequence of characters (empty or not), \(\mathbb{X}_{n}\):
+$$P := \underline{\_ \mathbb{X}_{n} \underline{L}} > Q := \underline{\mathbb{X}_{n} \underline{L}}$$
+
+Proof.
+
+\bigskip
+
+Suppose that \(\mathbb{X}_{n}\) does not contain spaces.
+Then,
+$$P_{n} : \underline{\_ \mathbb{X}_{n} \underline{L}} \to \underline{\mathbb{X}_{n} \underline{L}}$$
+So, \(P_{n} = Q\) and \(Q\) is accessible from \(P\).
+Therefore, by the one-step accessibility lemma, \(P > Q\).
+
+\bigskip
+
+Suppose that \(\mathbb{X}_{n}\) does contain spaces.
+Then, \(\underline{\mathbb{X}_{n} \underline{L}} \to \underline{\mathbb{X}_{n}' \underline{L}}\).
+Without loss of generality, split \(\mathbb{X}_{n}\) by its rightmost space.
+Define \(\mathbb{X}_{n} = A + \underline{\_} + B\) where \(\mathbb{X}_{b}\) contains no spaces.
+Then, \(\mathbb{X}_{n}' = A + B\)
+
+\bigskip
+\(\mathbb{X}_{n}\) either contains or does not contain spaces, so by disjunction elimination, the lemma holds.
+
+Scratch (problematic because it depends on the concat lemma):
+Suppose that \(\mathbb{X}_{n}\) does contain spaces.
+Then, \(\underline{\mathbb{X}_{n} \underline{L}} \to \underline{\mathbb{X}_{n}' \underline{L}}\).
+By the reduction lemma, since the sequence \(\mathbb{X}_{n}\) has spaces, \(\mathbb{X}_{n} > \mathbb{X}_{n}'\).
+
+\subsection*{Acknowledgements}
+\label{sec:org4ff3a35}
+Sophie Vulpe looked over my proofs and provided excellent feedback and encouragement.
+\end{document}

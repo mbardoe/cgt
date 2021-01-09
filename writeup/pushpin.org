@@ -1,0 +1,144 @@
+#+title: Pushpin (maybe I got the game name wrong) Proofs
+#+author: Max Fan
+#+OPTIONS: toc:nil num:nil
+#+STARTUP: noindent
+#+LATEX_HEADER: \setlength{\parindent}{0pt}
+
+For the following lemmas, I'm considering all games in which left has a winning strategy (values > 0).
+By swapping \underline{L} and \underline{R}, you can get the same results for \underline{R} and thus for all valid positions of the game.
+
+\bigskip
+
+Notation:
+
+- Each literal symbol will be underlined (\underline{L} or \underline{R})
+
+- $\mathbb{X}_{n}$ represents, without loss of generality any sequence of characters or spaces of length $n$.
+  $\mathbb{X}_{n}'$ represents the sequence $\mathbb{X}$ with the rightmost space removed, if one exists.
+  If a rightmost space does not exist, then $\mathbb{X}_{n}=\mathbb{X}_{n}'$
+
+- Upper case symbols (like $G$, $A$, and $B$) represent sequences/game states.
+
+- Greek symbols will be used to denote a single character, that can either be $\underline{L}$, $\underline{R}$,  or $\_$.
+
+- The entire game state will be completely underlined (e.g. $\underline{\underline{L} \underline{L} \underline{R}}$)
+
+- "+" means concatenation of a sequence
+
+The evaluation of a sequence will be denoted like so, where $G$ is the current game state and the number preceding the colon is the square being pushed:
+$$G := \underline{\underline{L} \underline{L} \underline{R}}$$
+$$G_{0}: \underline{\underline{L} \underline{L} \underline{R}} \to \underline{\_ \underline{L} \underline{R}}$$
+$$G_{1}: \underline{\underline{L} \underline{L} \underline{R}} \to \underline{\underline{L} \underline{R}}$$
+$$G_{2}: \underline{\underline{L} \underline{L} \underline{R}} \to \underline{\underline{L} \underline{R}}$$
+
+The game is zero-indexed.
+
+Different game positions can be compared like so:
+$$G > G_{1} \ge G_{2}$$
+
+* Lemmas
+** Left Accessibility Axiom (done)
+If one game position $Q$ is accessible from another game position $P$, ending in $\underline{L}$, by a series of moves, then $P > Q$.
+
+Rationale:
+Whenever a move is played, by $\underline{L}$ or $\underline{R}$, the value of the game is always closer to zero.
+
+** Right Accessibility Axiom (done)
+If one game position $Q$ is accessible from another game position $P$, ending in $\underline{R}$, by a series of moves, then $P < Q$.
+
+Rationale:
+Whenever a move is played, by $\underline{L}$ or $\underline{R}$, the value of the game is always closer to zero.
+
+** Negation Axiom (done)
+Swapping all values of $\underline{L}$ and $\underline{R}$ in the game state is logically equivalent to negating the value of the game.
+
+** Left Reduction Lemma (done)
+If $\mathbb{X}_{n}$ has spaces and ends in $\underline{L}$, then:
+$$\mathbb{X}_{n} > \mathbb{X}_{n}'$$
+If $\mathbb{X}_{n}$ has no spaces and ends in $\underline{L}$, then:
+$$\mathbb{X}_{n} = \mathbb{X}_{n}'$$
+
+** Right Reduction Lemma (done)
+If $\mathbb{X}_{n}$ has spaces and ends in $\underline{R}$, then:
+$$\mathbb{X}_{n} < \mathbb{X}_{n}'$$
+If $\mathbb{X}_{n}$ has no spaces and ends in $\underline{R}$, then:
+$$\mathbb{X}_{n} = \mathbb{X}_{n}'$$
+
+** Same-Length Concat Lemma
+If $P > Q$ and $P$ and $Q$ are of the same length and $A$ ends in $\underline{L}$, then $P + A > Q + A$.
+Proof.
+
+\bigskip
+Starting from the rightmost square, if $P > Q$ then $P \not= Q$ and $P$ and $Q$ must differ at a location $n$.
+Let $P = P_{1} + \underline{\alpha} + A$ and $Q = Q_{1} + \underline{\beta} + A$ where $\beta$ is the symbol at the location $n$ where $P$ and $Q$ differ.
+By construction, $\underline{\alpha} \not= \underline{\beta}$.
+Suppose for contradiction that $\underline{\alpha} < \underline{\beta}$.
+Then,
+
+Suppose $P$ is positive.
+$Q$ is either positive, zero, or negative.
+If zero, done .
+
+** General Prepend Lemma (done)
+If $A$ ends in $\underline{L}$, then for any characters $\underline{\alpha}$ and $\underline{\beta}$ such that $\underline{\alpha} > \underline{\beta}$, then $P := \underline{\underline{\alpha} + A} > Q := \underline{\underline{\beta} + A}$. Proof.
+
+There are six cases to examine since $\underline{\alpha}$ and $\underline{\beta}$ can either be
+$\underline{L}$, $\underline{R}$, $\_$:
+- $\underline{\alpha} = \underline{L}$, $\underline{\beta} = \underline{\_}$
+  In this case, $P_{0}: \underline{\underline{\alpha} + A} \to \underline{\underline{\beta} + A}$, so
+  $P > Q$ by the left accessibility axiom.
+
+- $\underline{\alpha} = \underline{\_}$, $\underline{\beta} = \underline{R}$
+  In this case, we want to show that $P > Q$.
+  It is equivalent to show $-Q > -P$.
+  By the negation axiom, $-Q$ and -$P$ both end in $\underline{R}$.
+  $-Q$ and $-P$ only differ at the zeroth place.
+  $$
+
+
+  Previous proof of this point:
+  In this case, $Q$ has more $\underline{R}$ values than $P$ and the same number and location of $\underline{L}$ values.
+  Since right has more moves available in $Q$ than in $P$, $P > Q$ (TODO: better justification).
+
+- $\underline{\alpha} = \underline{L}$, $\underline{\beta} = \underline{R}$
+  From the first case and the second case and the transitive property,
+  $P > Q$ follows.
+
+In all three cases, $P > Q$, so necessarily, $P > Q$.
+
+** Append Lemma (unproven)
+For any sequence of characters (empty or not), $\mathbb{X}_{n}$:
+$$\underline{\mathbb{X}_{n} \underline{L}} > \underline{\mathbb{X}_{n}}$$
+
+** Prepend Lemma (WIP)
+For any sequence of characters (empty or not), $\mathbb{X}_{n}$:
+$$P := \underline{\_ \mathbb{X}_{n} \underline{L}} > Q := \underline{\mathbb{X}_{n} \underline{L}}$$
+
+Proof.
+
+\bigskip
+
+Suppose that $\mathbb{X}_{n}$ does not contain spaces.
+Then,
+$$P_{n} : \underline{\_ \mathbb{X}_{n} \underline{L}} \to \underline{\mathbb{X}_{n} \underline{L}}$$
+So, $P_{n} = Q$ and $Q$ is accessible from $P$.
+Therefore, by the left accessibility axiom, $P > Q$.
+
+\bigskip
+
+Suppose that $\mathbb{X}_{n}$ does contain spaces.
+Then, $\underline{\mathbb{X}_{n} \underline{L}} \to \underline{\mathbb{X}_{n}' \underline{L}}$.
+Without loss of generality, split $\mathbb{X}_{n}$ by its rightmost space.
+Define $\mathbb{X}_{n} = A + \underline{\_} + B$ where $\mathbb{X}_{b}$ contains no spaces.
+Then, $\mathbb{X}_{n}' = A + B$
+
+\bigskip
+$\mathbb{X}_{n}$ either contains or does not contain spaces, so by disjunction elimination, the lemma holds.
+
+Scratch (problematic because it depends on the concat lemma):
+Suppose that $\mathbb{X}_{n}$ does contain spaces.
+Then, $\underline{\mathbb{X}_{n} \underline{L}} \to \underline{\mathbb{X}_{n}' \underline{L}}$.
+By the left reduction lemma, since the sequence $\mathbb{X}_{n}$ has spaces, $\mathbb{X}_{n} > \mathbb{X}_{n}'$.
+
+** Acknowledgements
+Sophie Vulpe looked over my proofs and provided excellent feedback and encouragement.

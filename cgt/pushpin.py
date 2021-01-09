@@ -28,7 +28,7 @@ class PushPinGame:
             return possible_moves
 
         for count, each_slot in enumerate(state):
-        # for count, each_slot in reversed(list(enumerate(state))):
+            # for count, each_slot in reversed(list(enumerate(state))):
             if each_slot == "L" and not possible_moves[0]:
                 next_state = deepcopy(state)
                 next_state = tuple(self.push(list(next_state), count))
