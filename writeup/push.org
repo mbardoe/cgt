@@ -1,4 +1,4 @@
-#+title: Pushpin (maybe I got the game name wrong) Proofs
+#+title: On the Game Push
 #+author: Max Fan
 #+OPTIONS: toc:nil num:nil
 #+STARTUP: noindent
@@ -31,7 +31,7 @@ $$G_{0}: \underline{\underline{L} \underline{L} \underline{R}} \to \underline{\_
 $$G_{1}: \underline{\underline{L} \underline{L} \underline{R}} \to \underline{\underline{L} \underline{R}}$$
 $$G_{2}: \underline{\underline{L} \underline{L} \underline{R}} \to \underline{\underline{L} \underline{R}}$$
 
-The game is zero-indexed.
+The game is zero-indexed and always ends in $\underline{R}$ or $\underline{L}$.
 
 Different game positions can be compared like so:
 $$G > G_{1} \ge G_{2}$$
@@ -139,6 +139,25 @@ Scratch (problematic because it depends on the concat lemma):
 Suppose that $\mathbb{X}_{n}$ does contain spaces.
 Then, $\underline{\mathbb{X}_{n} \underline{L}} \to \underline{\mathbb{X}_{n}' \underline{L}}$.
 By the left reduction lemma, since the sequence $\mathbb{X}_{n}$ has spaces, $\mathbb{X}_{n} > \mathbb{X}_{n}'$.
+** The Fundamental Theorem of Push
+Statement: For any given game, pushing the leftmost piece is always the optimal move.
+
+\bigskip
+
+A valid game ends in either $\underline{L}$ or $\underline{R}$.
+We first induct over all games that end in $\underline{L}$.
+
+\bigskip
+
+Base case:
+Pushing the first $\underline{L}$ is the optimal move in the game: $\underline{\underline{L}\underline{L}}$.
+
+Inductive hypothesis:
+Given any sequence of character(s) $\mathbb{X}$, the most
+
+\bigskip
+
+
 
 ** Acknowledgements
-Sophie Vulpe looked over my proofs and provided excellent feedback and encouragement.
+Sophie Vulpe provided excellent feedback and encouragement.

@@ -1,21 +1,21 @@
 from typing import List, Tuple
 from copy import deepcopy
 
-# PushPinState = List[str]
-PushPinState = Tuple[str]
+# PushState = List[str]
+PushState = Tuple[str]
 
 
-class PushPinGame:
+class PushGame:
     """
-    Pushpin game implementation
+    Push game implementation
     state is a list of "L", "R", or ""
     """
 
-    def __init__(self, state: PushPinState = ()):
+    def __init__(self, state: PushState = ()):
         self.state = state
         self.possible_moves = self.moves()
 
-    def moves(self) -> List[List[PushPinState]]:
+    def moves(self) -> List[List[PushState]]:
         """
         Return the possible moves left. If there are no moves left, return empty lists.
         """
@@ -70,18 +70,18 @@ class PushPinGame:
 
         return state
 
-    def apply(self, state: PushPinState):
+    def apply(self, state: PushState):
         """
         Apply a move or "state" return by moves.
         """
         self.state = state
 
     @staticmethod
-    def prune_states(state: PushPinState) -> PushPinState:
+    def prune_states(state: PushState) -> PushState:
         """
         Gets rid of empty hanging squares and normalizes the state.
         """
         if state and not state[-1]:
-            return PushPinGame.prune_states(state[:-1])
+            return PushGame.prune_states(state[:-1])
         else:
             return state

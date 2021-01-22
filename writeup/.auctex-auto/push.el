@@ -1,11 +1,10 @@
 (TeX-add-style-hook
- "pushpin"
+ "push"
  (lambda ()
    (TeX-add-to-alist 'LaTeX-provided-class-options
                      '(("article" "11pt")))
    (TeX-add-to-alist 'LaTeX-provided-package-options
                      '(("inputenc" "utf8") ("fontenc" "T1") ("ulem" "normalem")))
-   (add-to-list 'LaTeX-verbatim-environments-local "semiverbatim")
    (add-to-list 'LaTeX-verbatim-macros-with-braces-local "href")
    (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperref")
    (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperimage")
@@ -32,17 +31,17 @@
     "capt-of"
     "hyperref")
    (LaTeX-add-labels
-    "sec:org670c4c2"
-    "sec:org5070abd"
-    "sec:org6d194d1"
-    "sec:org6ca16a9"
-    "sec:org81ccfbe"
-    "sec:org88df57f"
-    "sec:org7a69964"
-    "sec:org8590d5c"
-    "sec:org7987701"
-    "sec:orgbab3051"
-    "sec:orgced4f7f"
-    "sec:org053da89"))
+    "sec:org2a07434"
+    "sec:org0fd5709"
+    "sec:orgcfcd220"
+    "sec:org0477d7d"
+    "sec:org2324387"
+    "sec:org178002c"
+    "sec:org78a6869"
+    "sec:org16f51a2"
+    "sec:org137b120"
+    "sec:org9c5a268"
+    "sec:orge864b6a"
+    "sec:orgc80ed16"))
  :latex)
 

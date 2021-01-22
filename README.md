@@ -10,9 +10,9 @@ Rationale:
 ## Example game (Push)
 ```python
 from cgt.game import GameTree
-from cgt.pushpin import PushPinGame
+from cgt.pushpin import PushGame
 
-case = PushPinGame(["", "L", "R"])
+case = PushGame(["", "L", "R"])
 print(GameTree(case).value())
 ```
 
@@ -50,4 +50,4 @@ class AbstractGame():
         raise NotImplementedError
 ```
 
-For a real-live working example, see [`cgt/pushpin.py`](/cgt/pushpin.py)
+For a real-live working example, see [`cgt/push.py`](/cgt/push.py)
